@@ -12,6 +12,6 @@ app.get('/', (req, res) => {
     res.end();
 })
 
-app.unsubscribe(routes)
+app.use(routes)
 
 app.listen(3000, () => console.log("Server is listening on http://localhost:3000..."));

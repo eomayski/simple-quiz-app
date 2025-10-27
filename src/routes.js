@@ -6,6 +6,6 @@ const routes = Router();
 routes.use(homeController);
 
 routes.get(`/*splat`, (req, res) => {
-    res.render('404');
+    res.send('Not found', { 'Content-Type': 'text/html; charset=utf-8' });
 })
 export default routes;
