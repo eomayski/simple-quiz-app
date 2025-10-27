@@ -3,21 +3,26 @@ import handlebars from 'express-handlebars';
 
 import routes from "./routes.js";
 
+const app = express();
+
+//Setup Handlebars
 app.engine('hbs', handlebars.engine({
     extname: 'hbs'
 }))
 app.set('view engine', 'hbs');
 app.set('views', 'src/views');
 
-const app = express();
+
+//Setup static middleware
+app.use(express.static('src/public'));
 
 app.use(urlencoded());
 
-app.get('/', (req, res) => {
-    res.send('Its Working', { 'Content-Type': 'text/html; charset=utf-8' })
+// app.get('/', (req, res) => {
+//     res.send('Its Working', { 'Content-Type': 'text/html; charset=utf-8' })
 
-    res.end();
-})
+//     res.end();
+// })
 
 app.use(routes)
 
