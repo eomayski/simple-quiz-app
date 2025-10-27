@@ -1,0 +1,25 @@
+{
+  "name": "simple-quiz-app",
+  "version": "1.0.0",
+  "description": "NodeJS - September 2025 Exam",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eomayski/simple-quiz-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/eomayski/simple-quiz-app/issues"
+  },
+  "homepage": "https://github.com/eomayski/simple-quiz-app#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
