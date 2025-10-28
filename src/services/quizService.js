@@ -7,6 +7,7 @@ export default {
     }
         ,
     async getOne(quizId) {
-        //TODO
+        const result = await data.quizzes.find(quiz => quiz.id === quizId);
+        return result;
     }
 }
