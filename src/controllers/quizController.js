@@ -11,7 +11,7 @@ quizController.get('/:quizId', async (req, res) => {
     let page = await resultService.resetQuestions();
 
     quizId = Number(quizId)
-    
+
     const quiz = await quizService.getOne(quizId);
 
     quiz.questions.sort(() => Math.random() - 0.5);
@@ -22,34 +22,56 @@ quizController.get('/:quizId', async (req, res) => {
     let answers = question.answers
 
     answers.sort(() => Math.random() - 0.5);
-    
+
     for (let index = 0; index < answers.length; index++) {
-        
+
         const labels = ['A.', 'B.', 'C.', 'D.']
 
         answers[index].label = labels[index]
     }
 
-    console.log(answers);
-   
-    res.render('quizzes/questions', {question, answers, quiz, page});
+    res.render('quizzes/questions', { question, answers, quiz, page });
 })
 
 quizController.post('/:quizId', async (req, res) => {
     const quizId = Number(req.params.quizId)
+
+    const quiz = await quizService.getOne(quizId);
+
     let answer = req.body
 
-    let [answerValue, answerId] = answer.answer.split("; ")
+    if (answer.answer) {
+        let [answerValue, answerId] = answer.answer.split("; ")
 
-    let rightAnswer = await quizService.getRightAnswer(quizId, Number(answerId))
+        let rightAnswer = await quizService.getRightAnswer(quizId, Number(answerId))
 
-    if (answerValue === rightAnswer) {
-        resultService.updateAnswers()
+        if (answerValue === rightAnswer) {
+            resultService.updateAnswers()
+        }
     }
-    
-    
 
-    res.end()
+    let page = await resultService.updateQuestions();
+
+
+
+    let isFinal = false
+    if (page === 10) {
+        isFinal = true
+    }
+
+    const question = quiz.questions[page - 1];
+    let answers = question.answers
+
+    answers.sort(() => Math.random() - 0.5);
+
+    for (let index = 0; index < answers.length; index++) {
+
+        const labels = ['A.', 'B.', 'C.', 'D.']
+
+        answers[index].label = labels[index]
+    }
+
+    res.render('quizzes/questions', { question, answers, quiz, page, isFinal })
 })
 
 export default quizController;

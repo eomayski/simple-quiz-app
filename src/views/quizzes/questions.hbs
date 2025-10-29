@@ -14,7 +14,7 @@
                 {{/each}}
             </label>
             <a href="/quizzes/{{quiz.id}}" id="restart-quiz-btn">Reset Quiz</a>
-            {{#if isLast}}
+            {{#if isFinal}}
             <a href="/quizzes/results" id="final-btn" >Complete</a>
             {{else}}
             <button type="submit" id="next-question-btn" >Next Question</button>
