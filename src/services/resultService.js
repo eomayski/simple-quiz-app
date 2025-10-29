@@ -4,11 +4,11 @@ import result from "../models/Result.js";
 
 export default {
     async getAnswers(){
-        return await result.correctAnswers
+        return await result.result.correctAnswers
     },
 
     async getQuestions(){
-        return await result.questionsCount
+        return await result.result.questionsCount
     },
 
     async updateAnswers() {

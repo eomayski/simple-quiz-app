@@ -4,6 +4,8 @@ import resultService from "../services/resultService.js";
 
 const quizController = Router();
 
+
+
 quizController.get('/:quizId', async (req, res) => {
     let quizId = req.params.quizId
 
@@ -31,7 +33,9 @@ quizController.get('/:quizId', async (req, res) => {
     }
 
     res.render('quizzes/questions', { question, answers, quiz, page });
-})
+});
+
+
 
 quizController.post('/:quizId', async (req, res) => {
     const quizId = Number(req.params.quizId)
@@ -72,6 +76,34 @@ quizController.post('/:quizId', async (req, res) => {
     }
 
     res.render('quizzes/questions', { question, answers, quiz, page, isFinal })
+})
+
+quizController.post('/:quizId/results', async (req, res) => {
+    const quizId = Number(req.params.quizId)
+
+    const quiz = await quizService.getOne(quizId);
+
+    let answer = req.body
+
+    if (answer.answer) {
+        let [answerValue, answerId] = answer.answer.split("; ")
+
+        let rightAnswer = await quizService.getRightAnswer(quizId, Number(answerId))
+
+        if (answerValue === rightAnswer) {
+            resultService.updateAnswers()
+        }
+    }
+
+    const score = await resultService.getAnswers();
+
+    let isSuccess = false;
+
+    if (score > 5) {
+        isSuccess = true
+    }
+
+    res.render('quizzes/results', {score, isSuccess});
 })
 
 export default quizController;

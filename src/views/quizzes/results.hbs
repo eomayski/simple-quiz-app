@@ -1,0 +1,11 @@
+<section id="result-view" class="view hidden">
+    <h2>Quiz Finished!</h2>
+    <p id="final-score">Your score is: {{score}}/10</p>
+    {{#if isSuccess}}
+    <p id="score-message">Great job!</p>
+    {{else}}
+    <p id="score-message">Try again!</p>
+    {{/if}}
+
+    <a href="/" id="go-to-start-btn">Start New Quiz</a>
+</section>

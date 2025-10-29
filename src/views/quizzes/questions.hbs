@@ -1,23 +1,31 @@
 <section id="question-view" class="view hidden">
-        <div class="progress-info">
-            <p id="question-counter">Question {{page}} / 10</p>
-            <progress id="quiz-progress" value="{{page}}" max="10"></progress>
-        </div>
+    <div class="progress-info">
+        <p id="question-counter">Question {{page}} / 10</p>
+        <progress id="quiz-progress" value="{{page}}" max="10"></progress>
+    </div>
 
-        <h2 id="question-text">{{question.question}}</h2>
-
-        <form id="answers-form" class="answers-container" method="post">
-            <label class="answer-label">
-                {{#each answers}}
-                <input type="radio" name="answer" value="{{answer.value}}; {{answer.questionId}}">
-                <span class="answer-text">{{label}} {{answer.value}}</span>
-                {{/each}}
-            </label>
-            <a href="/quizzes/{{quiz.id}}" id="restart-quiz-btn">Reset Quiz</a>
-            {{#if isFinal}}
-            <a href="/quizzes/results" id="final-btn" >Complete</a>
-            {{else}}
-            <button type="submit" id="next-question-btn" >Next Question</button>
-            {{/if}}
-        </form>
+    <h2 id="question-text">{{question.question}}</h2>
+    {{#if isFinal}}
+    <form id="answers-form" class="answers-container" method="post" action="/quizzes/{{quiz.id}}/results/">
+        <label class="answer-label">
+            {{#each answers}}
+            <input type="radio" name="answer" value="{{answer.value}}; {{answer.questionId}}">
+            <span class="answer-text">{{label}} {{answer.value}}</span>
+            {{/each}}
+        </label>
+        <a href="/quizzes/{{quiz.id}}" id="restart-quiz-btn">Reset Quiz</a>
+        <button type="submit" id="next-question-btn">Complete</button>
+    </form>
+    {{else}}
+    <form id="answers-form" class="answers-container" method="post">
+        <label class="answer-label">
+            {{#each answers}}
+            <input type="radio" name="answer" value="{{answer.value}}; {{answer.questionId}}">
+            <span class="answer-text">{{label}} {{answer.value}}</span>
+            {{/each}}
+        </label>
+        <a href="/quizzes/{{quiz.id}}" id="restart-quiz-btn">Reset Quiz</a>
+        <button type="submit" id="next-question-btn">Next Question</button>
+    </form>
+    {{/if}}
 </section>
