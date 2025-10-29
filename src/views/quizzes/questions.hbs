@@ -7,25 +7,29 @@
     <h2 id="question-text">{{question.question}}</h2>
     {{#if isFinal}}
     <form id="answers-form" class="answers-container" method="post" action="/quizzes/{{quiz.id}}/results/">
-        <label class="answer-label">
             {{#each answers}}
+            <label class="answer-label">
             <input type="radio" name="answer" value="{{answer.value}}; {{answer.questionId}}">
             <span class="answer-text">{{label}} {{answer.value}}</span>
+            </label>
             {{/each}}
-        </label>
+        <div id="buttons-container" class="controls">
         <a href="/quizzes/{{quiz.id}}" id="restart-quiz-btn">Reset Quiz</a>
         <button type="submit" id="next-question-btn">Complete</button>
+        </div>
     </form>
     {{else}}
     <form id="answers-form" class="answers-container" method="post">
-        <label class="answer-label">
             {{#each answers}}
+        <label class="answer-label">
             <input type="radio" name="answer" value="{{answer.value}}; {{answer.questionId}}">
             <span class="answer-text">{{label}} {{answer.value}}</span>
-            {{/each}}
         </label>
+            {{/each}}
+        <div id="buttons-container" class="controls">
         <a href="/quizzes/{{quiz.id}}" id="restart-quiz-btn">Reset Quiz</a>
         <button type="submit" id="next-question-btn">Next Question</button>
+        </div>
     </form>
     {{/if}}
 </section>
