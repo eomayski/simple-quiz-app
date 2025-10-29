@@ -1,8 +1,13 @@
 <section id="start-view" class="view active">
+    {{#if quizzes}}
         <h1>Chose Your Quiz</h1>
         <div class="quiz-selection">
             {{#each quizzes}}
             <a class="quiz-btn" data-quiz-id="1" href="/quizzes/{{id}}">{{name}}</a>
             {{/each}}
         </div>
+    {{else}}
+    {{!-- Not so possible with local data but is good to have --}}
+        <h1>Chose Your Quiz</h1>
+    {{/if}}
     </section>
